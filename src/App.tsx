@@ -6,6 +6,7 @@ function App() {
 			<img
 				src="/evergreen-construction-logo.svg"
 				alt="Evergreen Construction Logo"
+				style={{ width: "200px", height: "200px", borderRadius: "10px" }}
 			/>
 			<h1>Future Home of Evergreen Construction, LLC</h1>
 		</>
