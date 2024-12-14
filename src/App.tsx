@@ -8,7 +8,7 @@ function App() {
 				alt="Evergreen Construction Logo"
 				style={{ width: "200px", height: "200px", borderRadius: "10px" }}
 			/>
-			<h2>Future Home of</h2>
+			<h1>Future Home of</h1>
 			<h1>Evergreen Construction, LLC</h1>
 		</>
 	)
