@@ -24,6 +24,9 @@ const ColorPaletteExamples: React.FC = () => {
           cursor: 'pointer',
           margin: '20px',
         }}
+        onClick={() => {
+          alert('Clicked the Button!');
+        }}
       >
         Call to Action
       </Button>
