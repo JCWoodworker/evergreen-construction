@@ -1,17 +1,20 @@
+import { Route } from "react-router-dom"
+import { Routes } from "react-router-dom"
 import "./App.css"
+
+import Home from "./application/home/Home"
+import ContactForm from "./application/contact/ContactForm"
 
 function App() {
 	return (
 		<>
-			<img
-				src="/evergreen-construction-logo.svg"
-				alt="Evergreen Construction Logo"
-				style={{ width: "200px", height: "200px", borderRadius: "10px" }}
-			/>
-			<h1>Future Home of</h1>
-			<h1>Evergreen Construction, LLC</h1>
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route path="/contact" element={<ContactForm />} />
+			</Routes>
 		</>
 	)
+
 }
 
 export default App
