@@ -15,7 +15,7 @@ const Home = () => {
 			}}
 		>
 			<img
-				style={{ margin: "20px", width: "300px", borderRadius: "20px" }}
+				style={{ margin: "20px", width: "200px", borderRadius: "20px" }}
 				src="/evergreen-construction-logo.svg"
 				alt="Evergreen Construction Logo"
 			/>
