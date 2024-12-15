@@ -1,26 +1,39 @@
-const ContactForm = () => {
-	return (
-		<form name="contact" data-netlify="true">
-			<p>
-				<label>
-					Your Name: <input type="text" name="name" />
-				</label>
-			</p>
-			<p>
-				<label>
-					Your Email: <input type="email" name="email" />
-				</label>
-			</p>
-			<p>
-				<label>
-					Message: <textarea name="message"></textarea>
-				</label>
-			</p>
-			<p>
-				<button type="submit">Send</button>
-			</p>
-		</form>
-	)
+import { useForm, ValidationError } from '@formspree/react';
+
+function Contact() {
+  const [state, handleSubmit] = useForm("xwpkderv");
+  if (state.succeeded) {
+      return <p>Thanks for joining!</p>;
+  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="email">
+        Email Address
+      </label>
+      <input
+        id="email"
+        type="email" 
+        name="email"
+      />
+      <ValidationError 
+        prefix="Email" 
+        field="email"
+        errors={state.errors}
+      />
+      <textarea
+        id="message"
+        name="message"
+      />
+      <ValidationError 
+        prefix="Message" 
+        field="message"
+        errors={state.errors}
+      />
+      <button type="submit" disabled={state.submitting}>
+        Submit
+      </button>
+    </form>
+  );
 }
 
-export default ContactForm
+export default Contact
