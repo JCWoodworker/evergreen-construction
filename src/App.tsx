@@ -4,6 +4,7 @@ import "./App.css"
 
 import Home from "./application/home/Home"
 import ContactForm from "./application/contact/ContactForm"
+import ColorPalette from "./application/design/ColorPalette"
 
 function App() {
 	return (
@@ -19,6 +20,8 @@ function App() {
 				<Route path="/blog" element={<Blog />} />
 				<Route path="/blog/:id" element={<BlogPost />} />
 				<Route path="/customer-portal" element={<CustomerPortal />} /> */}
+
+				<Route path="/design/color-palette" element={<ColorPalette />} />
 
 			</Routes>
 		</>
