@@ -63,6 +63,7 @@ const ColorPalette: React.FC = () => {
 				))}
 			</Box>
 			<Divider sx={{ borderColor: "#757575", margin: "20px 0" }} />
+			<Divider sx={{ borderColor: "#757575", margin: "20px 0" }} />
 			<ColorPaletteExamples />
 		</Box>
 	)
