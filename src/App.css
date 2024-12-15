@@ -8,7 +8,6 @@
 #root {
 	max-width: 100%;
 	margin: 0 auto;
-	padding: 2rem;
 	text-align: center;
 }
 
@@ -17,4 +16,11 @@
 	#root {
 		padding: 1rem; /* Adjust padding for smaller screens */
 	}
+}
+
+/* Ensure the body covers the full height */
+body {
+	min-height: 100vh; /* Ensure body takes full height */
+	display: flex;
+	flex-direction: column;
 }

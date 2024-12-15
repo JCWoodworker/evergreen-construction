@@ -5,6 +5,8 @@ import "./App.css"
 import Home from "./application/home/Home"
 import ContactForm from "./application/contact/ContactForm"
 import ColorPalette from "./application/design/ColorPalette"
+import FreeEstimate from "./application/contact/FreeEstimate"
+import NotFound from "./application/NotFound"
 
 function App() {
 	return (
@@ -12,21 +14,24 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/contact" element={<ContactForm />} />
+				<Route path="/free-estimate" element={<FreeEstimate />} />
+				<Route path="*" element={<NotFound />} />
+								
 
-				{/* TODO: Add these components */}
-				{/* <Route path="/about" element={<About />} />
-				<Route path="/services" element={<Services />} />
-				<Route path="/portfolio" element={<Portfolio />} />
-				<Route path="/blog" element={<Blog />} />
-				<Route path="/blog/:id" element={<BlogPost />} />
-				<Route path="/customer-portal" element={<CustomerPortal />} /> */}
+					{/* TODO: Add these components */}
+					{/* <Route path="/about" element={<About />} />
+					<Route path="/services" element={<Services />} />
+					<Route path="/portfolio" element={<Portfolio />} />
+					<Route path="/blog" element={<Blog />} />
+					<Route path="/blog/:id" element={<BlogPost />} />
+					<Route path="/customer-portal" element={<CustomerPortal />} /> */}
 
-				<Route path="/design/color-palette" element={<ColorPalette />} />
+					<Route path="/design/color-palette" element={<ColorPalette />} />
 
-			</Routes>
-		</>
-	)
+				</Routes>
+			</>
+		)
 
-}
+	}
 
-export default App
+	export default App
