@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import { useForm, ValidationError } from '@formspree/react';
 
 function Contact() {
@@ -29,9 +30,9 @@ function Contact() {
         field="message"
         errors={state.errors}
       />
-      <button type="submit" disabled={state.submitting}>
+      <Button type="submit" disabled={state.submitting}>
         Submit
-      </button>
+      </Button>
     </form>
   );
 }
