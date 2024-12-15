@@ -41,6 +41,11 @@ function Contact() {
 				disabled={state.submitting}
 				variant="contained"
 				color="primary"
+				sx={{
+					backgroundColor: "#004338",
+					color: "white",
+					marginTop: "10px",
+				}}
 			>
 				Submit
 			</Button>
