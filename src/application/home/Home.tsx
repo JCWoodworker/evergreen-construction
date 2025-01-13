@@ -1,6 +1,10 @@
-import { Box, Typography, Button, Grid, Card, CardContent } from "@mui/material"
+import { Box, Typography, Grid, Card, CardContent } from "@mui/material"
+import FreeEstimateButton from "../contact/FreeEstimateButton"
+import { useState } from "react"
+import FreeEstimate from "../contact/FreeEstimate"
 
 const Home = () => {
+	const [estimateModalOpen, setEstimateModalOpen] = useState(false)
 	return (
 		<Box
 			sx={{
@@ -32,14 +36,9 @@ const Home = () => {
 			>
 				Building Your Dreams with Quality and Integrity
 			</Typography>
-			<Button
-				variant="contained"
-				color="primary"
-				sx={{ marginBottom: 4, backgroundColor: "#004338" }}
-				href="/free-estimate"
-			>
-				Get a Free Estimate
-			</Button>
+
+			<FreeEstimateButton setEstimateModalOpen={setEstimateModalOpen} />
+
 			<Grid container spacing={4} justifyContent="center">
 				<Grid item xs={12} sm={6} md={4}>
 					<Card>
@@ -92,14 +91,13 @@ const Home = () => {
 					</Card>
 				</Grid>
 			</Grid>
-			<Button
-				variant="contained"
-				color="primary"
-				sx={{ margin: 4, backgroundColor: "#004338" }}
-				href="/free-estimate"
-			>
-				Get a Free Estimate
-			</Button>
+
+			<FreeEstimateButton setEstimateModalOpen={setEstimateModalOpen} />
+
+			<FreeEstimate
+				open={estimateModalOpen}
+				handleClose={() => setEstimateModalOpen(false)}
+			/>
 		</Box>
 	)
 }
