@@ -23,4 +23,16 @@ body {
   min-height: 100vh;
 }
 
+.banner {
+	width: 70%;
+	height: 400px;
+	object-fit: cover;
+	object-position: center;
+	display: block;
+	margin: 20px auto;
+	@media (max-width: 768px) {
+		width: 200px;
+		height: 200px;
+	}
+}
 

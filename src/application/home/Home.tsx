@@ -15,15 +15,16 @@ const Home = () => {
 			}}
 		>
 			<img
-				style={{ margin: "20px", width: "200px", borderRadius: "20px" }}
-				src="/evergreen-construction-logo.svg"
+				className="banner"
+				src="/evergreen-construction-banner.svg"
 				alt="Evergreen Construction Logo"
 			/>
+
 			<Typography
 				variant="h3"
 				sx={{ color: "#004338", textAlign: "center", fontWeight: "bold" }}
 			>
-				Evergreen Construction, LLC
+				Evergreen Construction, RI
 			</Typography>
 			<Typography
 				variant="body1"
@@ -91,7 +92,7 @@ const Home = () => {
 					</Card>
 				</Grid>
 			</Grid>
-      <Button
+			<Button
 				variant="contained"
 				color="primary"
 				sx={{ margin: 4, backgroundColor: "#004338" }}
