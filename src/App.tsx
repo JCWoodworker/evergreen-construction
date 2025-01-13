@@ -13,6 +13,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/contact" element={<ContactForm />} />
+				{/* TODO: Remove /contact route - change contact to a modal on the home page */}
 				<Route path="*" element={<NotFound />} />
 								
 
