@@ -5,7 +5,6 @@ import "./App.css"
 import Home from "./application/home/Home"
 import ContactForm from "./application/contact/ContactForm"
 import ColorPalette from "./application/design/ColorPalette"
-import FreeEstimate from "./application/contact/FreeEstimate"
 import NotFound from "./application/NotFound"
 
 function App() {
@@ -14,7 +13,6 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/contact" element={<ContactForm />} />
-				<Route path="/free-estimate" element={<FreeEstimate />} />
 				<Route path="*" element={<NotFound />} />
 								
 
