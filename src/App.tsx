@@ -3,7 +3,6 @@ import { Routes } from "react-router-dom"
 import "./App.css"
 
 import Home from "./application/home/Home"
-import ContactForm from "./application/contact/ContactForm"
 import ColorPalette from "./application/design/ColorPalette"
 import NotFound from "./application/NotFound"
 
@@ -12,8 +11,6 @@ function App() {
 		<>
 			<Routes>
 				<Route path="/" element={<Home />} />
-				<Route path="/contact" element={<ContactForm />} />
-				{/* TODO: Remove /contact route - change contact to a modal on the home page */}
 				<Route path="*" element={<NotFound />} />
 								
 

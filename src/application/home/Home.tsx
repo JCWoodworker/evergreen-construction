@@ -1,10 +1,14 @@
+// TODO: Update to MUI's Gridv2 - Grid v1 is deprecated
 import { Box, Typography, Grid, Card, CardContent } from "@mui/material"
-import FreeEstimateButton from "../contact/FreeEstimateButton"
+import FreeEstimateButton from "../contact/calls-to-action/free-estimate/FreeEstimateButton"
 import { useState } from "react"
-import FreeEstimate from "../contact/FreeEstimate"
+import FreeEstimateModal from "../contact/calls-to-action/free-estimate/FreeEstimateModal"
+import ContactModal from "../contact/calls-to-action/contact/ContactModal"
+import ContactButton from "../contact/calls-to-action/contact/ContactButton"
 
 const Home = () => {
 	const [estimateModalOpen, setEstimateModalOpen] = useState(false)
+	const [contactModalOpen, setContactModalOpen] = useState(false)
 	return (
 		<Box
 			sx={{
@@ -30,6 +34,7 @@ const Home = () => {
 			>
 				Evergreen Construction, RI
 			</Typography>
+
 			<Typography
 				variant="body1"
 				sx={{ color: "#004338", textAlign: "center", marginBottom: 4 }}
@@ -92,11 +97,15 @@ const Home = () => {
 				</Grid>
 			</Grid>
 
-			<FreeEstimateButton setEstimateModalOpen={setEstimateModalOpen} />
+			<ContactButton setContactModalOpen={setContactModalOpen} />
 
-			<FreeEstimate
+			<FreeEstimateModal
 				open={estimateModalOpen}
 				handleClose={() => setEstimateModalOpen(false)}
+			/>
+			<ContactModal
+				open={contactModalOpen}
+				handleClose={() => setContactModalOpen(false)}
 			/>
 		</Box>
 	)
