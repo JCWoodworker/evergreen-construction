@@ -1,26 +1,40 @@
 import {
+	Box,
 	Button,
+	IconButton,
+	Modal,
 	TextField,
 	Typography,
-	Modal,
-	IconButton,
-	Box,
 } from "@mui/material"
 import { useForm, ValidationError } from "@formspree/react"
 import { Close } from "@mui/icons-material"
 
-function FreeEstimate({
+function ContactModal({
 	open,
 	handleClose,
 }: {
 	open: boolean
 	handleClose: () => void
 }) {
-	const [state, handleSubmit] = useForm("manygybq")
+	const [state, handleSubmit] = useForm("xwpkderv")
 	if (state.succeeded) {
-		alert("Thank you for contacting us.  We'll be in touch soon!")
-		handleClose()
+		alert("Thank you for contacting us!")
+		window.location.href = "/"
 	}
+
+	const fieldStyle = {
+		backgroundColor: "#FFF",
+		borderRadius: "5px",
+		"& .MuiInputLabel-root.Mui-focused": {
+			padding: "2px 10px",
+			color: "rgba(0, 0, 0, 0.6)",
+			backgroundColor: "#FFF",
+			borderRadius: "5px",
+			border: "2px solid #D3D3D3",
+			boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
+		},
+	}
+
 	return (
 		<Modal
 			open={open}
@@ -54,7 +68,7 @@ function FreeEstimate({
 						marginTop: { xs: 5, md: 0 },
 					}}
 				>
-					Get a Free Estimate
+					Email Me Directly!
 				</Typography>
 				<form
 					onSubmit={handleSubmit}
@@ -62,29 +76,25 @@ function FreeEstimate({
 				>
 					<TextField
 						id="email"
-						label="Email Address"
+						label="Your Email Address"
 						type="email"
 						name="email"
 						fullWidth
 						margin="normal"
 						variant="outlined"
-						sx={{
-							backgroundColor: "#FFFFFF",
-						}}
+						sx={fieldStyle}
 					/>
 					<ValidationError prefix="Email" field="email" errors={state.errors} />
 					<TextField
 						id="message"
-						label="Describe your project"
+						label="Message"
 						name="message"
 						multiline
-						rows={8}
+						rows={4}
 						fullWidth
 						margin="normal"
 						variant="outlined"
-						sx={{
-							backgroundColor: "#FFFFFF",
-						}}
+						sx={fieldStyle}
 					/>
 					<ValidationError
 						prefix="Message"
@@ -110,4 +120,4 @@ function FreeEstimate({
 	)
 }
 
-export default FreeEstimate
+export default ContactModal
