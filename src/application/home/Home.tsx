@@ -9,6 +9,7 @@ import PageLinkButton from "../../components/PageLinkButton"
 const Home = () => {
 	const [estimateModalOpen, setEstimateModalOpen] = useState(false)
 	const [contactModalOpen, setContactModalOpen] = useState(false)
+
 	return (
 		<Box
 			sx={{
