@@ -1,10 +1,10 @@
 // TODO: Update to MUI's Gridv2 - Grid v1 is deprecated
 import { Box, Typography, Grid, Card, CardContent } from "@mui/material"
-import FreeEstimateButton from "../contact/calls-to-action/free-estimate/FreeEstimateButton"
 import { useState } from "react"
-import FreeEstimateModal from "../contact/calls-to-action/free-estimate/FreeEstimateModal"
-import ContactModal from "../contact/calls-to-action/contact/ContactModal"
-import ContactButton from "../contact/calls-to-action/contact/ContactButton"
+import FreeEstimateModal from "../calls-to-action/FreeEstimateModal"
+import ContactModal from "../calls-to-action/ContactModal"
+import ModalButton from "../../components/ModalButton"
+import PageLinkButton from "../../components/PageLinkButton"
 
 const Home = () => {
 	const [estimateModalOpen, setEstimateModalOpen] = useState(false)
@@ -42,7 +42,20 @@ const Home = () => {
 				Building Your Dreams with Quality and Integrity
 			</Typography>
 
-			<FreeEstimateButton setEstimateModalOpen={setEstimateModalOpen} />
+			<Box
+				sx={{
+					display: "flex",
+					flexDirection: "row",
+					justifyContent: "center",
+					width: "100%",
+				}}
+			>
+				<PageLinkButton buttonText="Portfolio" pageLink="/portfolio" />
+				<ModalButton
+					buttonText="Get a Free Estimate"
+					setModalOpen={setEstimateModalOpen}
+				/>
+			</Box>
 
 			<Grid container spacing={4} justifyContent="center">
 				<Grid item xs={12} sm={6} md={4}>
@@ -97,7 +110,10 @@ const Home = () => {
 				</Grid>
 			</Grid>
 
-			<ContactButton setContactModalOpen={setContactModalOpen} />
+			<ModalButton
+				buttonText="Contact Greg"
+				setModalOpen={setContactModalOpen}
+			/>
 
 			<FreeEstimateModal
 				open={estimateModalOpen}

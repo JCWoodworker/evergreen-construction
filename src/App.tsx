@@ -5,13 +5,16 @@ import "./App.css"
 import Home from "./application/home/Home"
 import ColorPalette from "./application/design/ColorPalette"
 import NotFound from "./application/NotFound"
+import Portfolio from "./application/portfolio/Portfolio"
 
 function App() {
 	return (
 		<>
 			<Routes>
 				<Route path="/" element={<Home />} />
+				<Route path="/portfolio" element={<Portfolio />} />
 				<Route path="*" element={<NotFound />} />
+				<Route path="/design/color-palette" element={<ColorPalette />} />
 								
 
 					{/* TODO: Add these components */}
@@ -22,7 +25,6 @@ function App() {
 					<Route path="/blog/:id" element={<BlogPost />} />
 					<Route path="/customer-portal" element={<CustomerPortal />} /> */}
 
-					<Route path="/design/color-palette" element={<ColorPalette />} />
 
 				</Routes>
 			</>
