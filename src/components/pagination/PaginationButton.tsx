@@ -22,6 +22,9 @@ const PaginationButton = ({
 				(title === "Previous" && currentPage === 1) ||
 				(title === "Next" && currentPage === totalPages)
 			}
+			sx={{
+				fontWeight: "bold",
+			}}
 		>
 			{title}
 		</Button>

@@ -29,13 +29,19 @@ const Pagination = ({
 					totalPages={totalPages}
 				/>
 			</Box>
-			<Box sx={{ marginTop: 2 }}>
+			<Box sx={{ marginTop: 1 }}>
 				{Array.from({ length: totalPages }, (_, i) => (
 					<Button
 						key={i}
 						onClick={() => setCurrentPage(i + 1)}
 						variant={currentPage === i + 1 ? "contained" : "outlined"}
-						sx={{ margin: "0 2px" }}
+						sx={{
+							color: currentPage === i + 1 ? "#004338" : "none",
+							fontWeight: "bold",
+							border: "none",
+							borderRadius: "5px",
+							backgroundColor: currentPage === i + 1 ? "#FFF" : "none",
+						}}
 					>
 						{i + 1}
 					</Button>

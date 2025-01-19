@@ -58,7 +58,7 @@ const Portfolio = () => {
 					</Button>
 				</Box>
 			</Box>
-			<Typography variant="h1" sx={{ marginTop: 6, marginBottom: 2 }}>
+			<Typography variant="h2" sx={{ marginTop: 6, marginBottom: 2 }}>
 				Portfolio
 			</Typography>
 
