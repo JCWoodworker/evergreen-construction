@@ -2,21 +2,22 @@ import { Box, Button, Typography } from "@mui/material"
 import HomeIcon from "@mui/icons-material/Home"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
+import Pagination from "../../components/pagination/Pagination"
 
 // TODO: LOTS TO DO HERE
-// - [ ] Add a loading state
-// - [ ] Add a way to view the full image
+// - [ ] Add a loading state / skeleton loader
+// - [x] Add a way to view the full image
 // - [ ] Update colors of pagination controls to match the theme
 // - [ ] Fetch images from the backend or from AWS S3
 // - [ ] Remove hardcoded image count
-// - [ ] Extract logic to a custom pagination component
+// - [x] Extract logic to a custom pagination component
 // - [ ] Extract home button to a custom navigation component
 
 const imagesPerPage = 8
 
 const Portfolio = () => {
 	const navigate = useNavigate()
-	const [currentPage, setCurrentPage] = useState(1)
+	const [currentPage, setCurrentPage] = useState<number>(1)
 
 	const totalImages = 29
 	const totalPages = Math.ceil(totalImages / imagesPerPage)
@@ -49,7 +50,7 @@ const Portfolio = () => {
 						transition: "background-color 0.3s",
 						display: "flex",
 						justifyContent: "flex-start",
-						padding: "8px 16px", // Optional padding for the Box
+						padding: "8px 16px",
 					}}
 				>
 					<Button onClick={() => navigate("/")}>
@@ -61,39 +62,11 @@ const Portfolio = () => {
 				Portfolio
 			</Typography>
 
-			{/* Pagination Controls */}
-			<Box sx={{ display: "flex", alignItems: "center" }}>
-				<Button
-					onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-					disabled={currentPage === 1}
-				>
-					Previous
-				</Button>
-				<Typography sx={{ margin: "0 1rem" }}>
-					Page {currentPage} of {totalPages}
-				</Typography>
-				<Button
-					onClick={() =>
-						setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-					}
-					disabled={currentPage === totalPages}
-				>
-					Next
-				</Button>
-			</Box>
-			<Box sx={{ marginTop: 2 }}>
-				{Array.from({ length: totalPages }, (_, i) => (
-					<Button
-						key={i}
-						onClick={() => setCurrentPage(i + 1)}
-						variant={currentPage === i + 1 ? "contained" : "outlined"}
-						sx={{ margin: "0 2px" }}
-					>
-						{i + 1}
-					</Button>
-				))}
-			</Box>
-			{/* End Pagination Controls */}
+			<Pagination
+				currentPage={currentPage}
+				setCurrentPage={setCurrentPage}
+				totalPages={totalPages}
+			/>
 
 			<Box className="portfolio-container">
 				{Array.from({ length: totalImages }, (_, i) => {
@@ -120,39 +93,12 @@ const Portfolio = () => {
 					return null
 				})}
 			</Box>
-			{/* Pagination Controls */}
-			<Box sx={{ display: "flex", alignItems: "center" }}>
-				<Button
-					onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-					disabled={currentPage === 1}
-				>
-					Previous
-				</Button>
-				<Typography sx={{ margin: "0 1rem" }}>
-					Page {currentPage} of {totalPages}
-				</Typography>
-				<Button
-					onClick={() =>
-						setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-					}
-					disabled={currentPage === totalPages}
-				>
-					Next
-				</Button>
-			</Box>
-			<Box sx={{ marginTop: 2 }}>
-				{Array.from({ length: totalPages }, (_, i) => (
-					<Button
-						key={i}
-						onClick={() => setCurrentPage(i + 1)}
-						variant={currentPage === i + 1 ? "contained" : "outlined"}
-						sx={{ margin: "0 2px" }}
-					>
-						{i + 1}
-					</Button>
-				))}
-			</Box>
-			{/* End Pagination Controls */}
+
+			<Pagination
+				currentPage={currentPage}
+				setCurrentPage={setCurrentPage}
+				totalPages={totalPages}
+			/>
 		</Box>
 	)
 }

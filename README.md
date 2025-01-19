@@ -7,7 +7,7 @@
 - [ ] See TODO in App.tsx
   - [ ] 5 items
 - [ ] See TODO in Home.tsx
-  - [ ] 1 item
+  - [ ] 2 items
 
 ## Color Palette
 
