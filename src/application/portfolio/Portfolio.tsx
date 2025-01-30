@@ -4,13 +4,10 @@ import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import Pagination from "../../components/pagination/Pagination"
 
-// TODO: LOTS TO DO HERE
+// TODO:
 // - [ ] Add a loading state / skeleton loader
-// - [x] Add a way to view the full image
-// - [ ] Update colors of pagination controls to match the theme
 // - [ ] Fetch images from the backend or from AWS S3
 // - [ ] Remove hardcoded image count
-// - [x] Extract logic to a custom pagination component
 // - [ ] Extract home button to a custom navigation component
 
 const imagesPerPage = 8

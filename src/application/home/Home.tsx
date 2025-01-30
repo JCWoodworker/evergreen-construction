@@ -1,12 +1,13 @@
-// TODO: 
-// Update to MUI's Gridv2 - Grid v1 is deprecated
-// Add a scheme file and export colors from there
 import { Box, Typography, Grid, Card, CardContent } from "@mui/material"
 import { useState } from "react"
 import FreeEstimateModal from "../calls-to-action/FreeEstimateModal"
 import ContactModal from "../calls-to-action/ContactModal"
 import ModalButton from "../../components/ModalButton"
 import PageLinkButton from "../../components/PageLinkButton"
+
+// TODO: 
+// Update to MUI's Gridv2 - Grid v1 is deprecated
+// Add a scheme file and export colors from there
 
 const Home = () => {
 	const [estimateModalOpen, setEstimateModalOpen] = useState(false)
