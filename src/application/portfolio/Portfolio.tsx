@@ -1,7 +1,19 @@
-import { Box, Button, Typography } from "@mui/material"
+import {
+	Box,
+	Button,
+	Typography,
+	ImageList,
+	ImageListItem,
+	Dialog,
+	IconButton,
+	Skeleton,
+	useMediaQuery,
+	useTheme,
+} from "@mui/material"
 import HomeIcon from "@mui/icons-material/Home"
+import CloseIcon from "@mui/icons-material/Close"
 import { useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useMemo, useState, useCallback } from "react"
 import Pagination from "../../components/pagination/Pagination"
 
 // TODO:
@@ -10,17 +22,72 @@ import Pagination from "../../components/pagination/Pagination"
 // - [ ] Remove hardcoded image count
 // - [ ] Extract home button to a custom navigation component
 
-const imagesPerPage = 8
+const imagesPerPage = 12
 
-const Portfolio = () => {
+const Portfolio = (): JSX.Element => {
 	const navigate = useNavigate()
 	const [currentPage, setCurrentPage] = useState<number>(1)
+	const [isLoading, setIsLoading] = useState<boolean>(true)
+	const [lightboxOpen, setLightboxOpen] = useState<boolean>(false)
+	const [activeIndex, setActiveIndex] = useState<number>(0)
+	const theme = useTheme()
+	const isSmall = useMediaQuery(theme.breakpoints.down("sm"))
 
 	const totalImages = 29
 	const totalPages = Math.ceil(totalImages / imagesPerPage)
 
 	const startIndex = (currentPage - 1) * imagesPerPage
 	const endIndex = startIndex + imagesPerPage
+
+	const images = useMemo(
+		() =>
+			Array.from(
+				{ length: totalImages },
+				(_, i) =>
+					`https://web-dev-business-client-sites.s3.us-east-2.amazonaws.com/evergreen-construction-ri/image${
+						i + 1
+					}.JPG`
+			),
+		[totalImages]
+	)
+
+	useEffect(() => {
+		// Preload current page thumbnails
+		setIsLoading(true)
+		const slice = images.slice(startIndex, endIndex)
+		let loaded = 0
+		slice.forEach((src) => {
+			const img = new Image()
+			img.src = src
+			img.onload = () => {
+				loaded += 1
+				if (loaded === slice.length) setIsLoading(false)
+			}
+			img.onerror = () => {
+				loaded += 1
+				if (loaded === slice.length) setIsLoading(false)
+			}
+		})
+	}, [images, startIndex, endIndex])
+
+	const openLightbox = useCallback((index: number) => {
+		setActiveIndex(index)
+		setLightboxOpen(true)
+	}, [])
+
+	const closeLightbox = useCallback(() => setLightboxOpen(false), [])
+
+	const handleKeyDown = useCallback(
+		(e: React.KeyboardEvent) => {
+			if (!lightboxOpen) return
+			if (e.key === "ArrowRight")
+				setActiveIndex((prev) => (prev + 1) % images.length)
+			if (e.key === "ArrowLeft")
+				setActiveIndex((prev) => (prev - 1 + images.length) % images.length)
+			if (e.key === "Escape") closeLightbox()
+		},
+		[closeLightbox, images.length, lightboxOpen]
+	)
 
 	return (
 		<Box
@@ -42,7 +109,7 @@ const Portfolio = () => {
 						left: 0,
 						width: "100%",
 						zIndex: 1000,
-						backgroundColor: "white",
+						backgroundColor: theme.palette.background.paper,
 						boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
 						transition: "background-color 0.3s",
 						display: "flex",
@@ -65,30 +132,43 @@ const Portfolio = () => {
 				totalPages={totalPages}
 			/>
 
-			<Box className="portfolio-container">
-				{Array.from({ length: totalImages }, (_, i) => {
-					const imageUrl = `https://web-dev-business-client-sites.s3.us-east-2.amazonaws.com/evergreen-construction-ri/image${
-						i + 1
-					}.JPG`
-					if (i >= startIndex && i < endIndex) {
-						return (
-							<a
-								key={i}
-								href={imageUrl}
-								target="_blank"
-								rel="noopener noreferrer"
-							>
+			<Box sx={{ width: "100%", px: 2 }} onKeyDown={handleKeyDown}>
+				{isLoading ? (
+					<Box
+						sx={{
+							display: "grid",
+							gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+							gap: 2,
+						}}
+					>
+						{Array.from({ length: imagesPerPage }).map((_, idx) => (
+							<Skeleton
+								key={idx}
+								variant="rounded"
+								height={isSmall ? 160 : 220}
+								sx={{ borderRadius: 2 }}
+							/>
+						))}
+					</Box>
+				) : (
+					<ImageList variant="masonry" cols={isSmall ? 2 : 4} gap={16}>
+						{images.slice(startIndex, endIndex).map((src, idx) => (
+							<ImageListItem key={src} sx={{ cursor: "zoom-in" }}>
 								<img
-									src={imageUrl}
-									alt={`Portfolio item ${i + 1}`}
-									className="portfolio-image"
+									src={`${src}`}
+									srcSet={`${src}`}
+									alt={`Portfolio item ${startIndex + idx + 1}`}
 									loading="lazy"
+									onClick={() => openLightbox(startIndex + idx)}
+									style={{
+										borderRadius: 12,
+										boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+									}}
 								/>
-							</a>
-						)
-					}
-					return null
-				})}
+							</ImageListItem>
+						))}
+					</ImageList>
+				)}
 			</Box>
 
 			<Pagination
@@ -96,6 +176,42 @@ const Portfolio = () => {
 				setCurrentPage={setCurrentPage}
 				totalPages={totalPages}
 			/>
+			<Dialog
+				open={lightboxOpen}
+				onClose={closeLightbox}
+				fullWidth
+				maxWidth="xl"
+				onKeyDown={(e) => handleKeyDown(e)}
+			>
+				<Box
+					sx={{
+						position: "relative",
+						backgroundColor: theme.palette.background.default,
+					}}
+				>
+					<IconButton
+						aria-label="Close"
+						onClick={closeLightbox}
+						sx={{ position: "absolute", top: 8, right: 8, zIndex: 2 }}
+					>
+						<CloseIcon />
+					</IconButton>
+					<Box
+						sx={{
+							display: "flex",
+							justifyContent: "center",
+							alignItems: "center",
+							p: 2,
+						}}
+					>
+						<img
+							src={images[activeIndex]}
+							alt={`Portfolio item ${activeIndex + 1}`}
+							style={{ maxWidth: "100%", maxHeight: "80vh", borderRadius: 8 }}
+						/>
+					</Box>
+				</Box>
+			</Dialog>
 		</Box>
 	)
 }

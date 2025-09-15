@@ -1,17 +1,25 @@
-import { Box, Typography, Grid, Card, CardContent } from "@mui/material"
+import {
+	Box,
+	Typography,
+	Grid,
+	Card,
+	CardContent,
+	useTheme,
+} from "@mui/material"
 import { useState } from "react"
 import FreeEstimateModal from "../calls-to-action/FreeEstimateModal"
 import ContactModal from "../calls-to-action/ContactModal"
 import ModalButton from "../../components/ModalButton"
 import PageLinkButton from "../../components/PageLinkButton"
 
-// TODO: 
+// TODO:
 // Update to MUI's Gridv2 - Grid v1 is deprecated
 // Add a scheme file and export colors from there
 
-const Home = () => {
+const Home = (): JSX.Element => {
 	const [estimateModalOpen, setEstimateModalOpen] = useState(false)
 	const [contactModalOpen, setContactModalOpen] = useState(false)
+	const theme = useTheme()
 
 	return (
 		<Box
@@ -20,8 +28,8 @@ const Home = () => {
 				flexDirection: "column",
 				alignItems: "center",
 				justifyContent: "flex-start",
-				backgroundColor: "#f5f5f5",
-				borderRadius: "10px",
+				backgroundColor: theme.palette.background.default,
+				borderRadius: theme.shape.borderRadius,
 				padding: 2,
 				minHeight: "100vh",
 			}}
@@ -34,14 +42,22 @@ const Home = () => {
 
 			<Typography
 				variant="h3"
-				sx={{ color: "#004338", textAlign: "center", fontWeight: "bold" }}
+				sx={{
+					color: theme.palette.primary.main,
+					textAlign: "center",
+					fontWeight: "bold",
+				}}
 			>
 				Evergreen Construction, RI
 			</Typography>
 
 			<Typography
 				variant="body1"
-				sx={{ color: "#004338", textAlign: "center", marginBottom: 4 }}
+				sx={{
+					color: theme.palette.text.secondary,
+					textAlign: "center",
+					marginBottom: 4,
+				}}
 			>
 				Building Your Dreams with Quality and Integrity
 			</Typography>
