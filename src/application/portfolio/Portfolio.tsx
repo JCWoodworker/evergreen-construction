@@ -9,10 +9,11 @@ import {
 	Skeleton,
 	useMediaQuery,
 	useTheme,
+	Link,
 } from "@mui/material"
 import HomeIcon from "@mui/icons-material/Home"
 import CloseIcon from "@mui/icons-material/Close"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link as RouterLink } from "react-router-dom"
 import { useEffect, useMemo, useState, useCallback } from "react"
 import Pagination from "../../components/pagination/Pagination"
 
@@ -153,7 +154,14 @@ const Portfolio = (): JSX.Element => {
 				) : (
 					<ImageList variant="masonry" cols={isSmall ? 2 : 4} gap={16}>
 						{images.slice(startIndex, endIndex).map((src, idx) => (
-							<ImageListItem key={src} sx={{ cursor: "zoom-in" }}>
+							<ImageListItem
+								key={src}
+								sx={{
+									position: "relative",
+									overflow: "hidden",
+									borderRadius: 2,
+								}}
+							>
 								<img
 									src={`${src}`}
 									srcSet={`${src}`}
@@ -163,8 +171,48 @@ const Portfolio = (): JSX.Element => {
 									style={{
 										borderRadius: 12,
 										boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+										width: "100%",
+										height: "100%",
+										display: "block",
 									}}
 								/>
+								<Box
+									className="portfolio-caption"
+									sx={{
+										position: "absolute",
+										inset: 0,
+										display: "flex",
+										alignItems: "flex-end",
+										p: 1.5,
+										background:
+											"linear-gradient(to top, rgba(0,0,0,0.45), rgba(0,0,0,0))",
+										opacity: 0,
+										transition: "opacity 200ms ease",
+										"&:hover": { opacity: 1 },
+									}}
+								>
+									<Box
+										sx={{
+											display: "flex",
+											width: "100%",
+											justifyContent: "space-between",
+											alignItems: "center",
+											color: "#fff",
+										}}
+									>
+										<Typography variant="subtitle2">
+											Project {startIndex + idx + 1}
+										</Typography>
+										<Link
+											component={RouterLink}
+											to={`/portfolio/${startIndex + idx + 1}`}
+											underline="hover"
+											sx={{ color: "#fff" }}
+										>
+											Details
+										</Link>
+									</Box>
+								</Box>
 							</ImageListItem>
 						))}
 					</ImageList>
