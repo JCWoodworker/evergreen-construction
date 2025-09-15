@@ -14,11 +14,12 @@ const PageLinkButton = ({
 			variant="contained"
 			color="primary"
 			sx={{
-				mx: { xs: 1, md: 2 },
-				my: { xs: 2, md: 2 },
-				minWidth: 220,
-				height: 56,
-				px: 3,
+				mx: { xs: 0, sm: 1, md: 2 },
+				my: { xs: 1, sm: 2 },
+				width: { xs: "100%", sm: "auto" },
+				minWidth: { xs: "auto", sm: 220 },
+				height: { xs: 48, sm: 56 },
+				px: { xs: 2, sm: 3 },
 			}}
 			onClick={() => navigate(pageLink)}
 		>

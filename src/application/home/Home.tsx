@@ -64,10 +64,11 @@ const Home = (): JSX.Element => {
 
 			<Box
 				sx={{
-					display: "flex",
-					flexDirection: "row",
-					justifyContent: "center",
+					display: "grid",
+					gridTemplateColumns: { xs: "1fr", sm: "repeat(2, auto)" },
+					gap: { xs: 1, sm: 2 },
 					width: "100%",
+					maxWidth: 720,
 				}}
 			>
 				<PageLinkButton buttonText="Portfolio" pageLink="/portfolio" />
@@ -77,12 +78,17 @@ const Home = (): JSX.Element => {
 				/>
 			</Box>
 
-			<Grid container spacing={4} justifyContent="center" alignItems="stretch">
+			<Grid
+				container
+				spacing={{ xs: 2, sm: 4 }}
+				justifyContent="center"
+				alignItems="stretch"
+			>
 				<Grid item xs={12} sm={6} md={4}>
 					<Card sx={{ height: "100%" }}>
 						<CardContent
 							sx={{
-								minHeight: 180,
+								minHeight: { xs: 140, sm: 180 },
 								height: "100%",
 								display: "flex",
 								flexDirection: "column",
@@ -109,7 +115,7 @@ const Home = (): JSX.Element => {
 					<Card sx={{ height: "100%" }}>
 						<CardContent
 							sx={{
-								minHeight: 180,
+								minHeight: { xs: 140, sm: 180 },
 								height: "100%",
 								display: "flex",
 								flexDirection: "column",
@@ -136,7 +142,7 @@ const Home = (): JSX.Element => {
 					<Card sx={{ height: "100%" }}>
 						<CardContent
 							sx={{
-								minHeight: 180,
+								minHeight: { xs: 140, sm: 180 },
 								height: "100%",
 								display: "flex",
 								flexDirection: "column",

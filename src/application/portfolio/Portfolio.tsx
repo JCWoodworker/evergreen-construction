@@ -202,14 +202,14 @@ const Portfolio = (): JSX.Element => {
 	)
 
 	return (
-		<Container maxWidth="lg" sx={{ py: { xs: 2, sm: 4 } }}>
+		<Container maxWidth="lg" sx={{ py: { xs: 1.5, sm: 4 } }}>
 			<Typography
 				variant={isSmall ? "h3" : "h2"}
 				sx={{ mb: 1, fontWeight: 800, letterSpacing: -0.5 }}
 			>
 				Portfolio
 			</Typography>
-			<Typography color="text.secondary" sx={{ mb: 3 }}>
+			<Typography color="text.secondary" sx={{ mb: { xs: 2, sm: 3 } }}>
 				Selected projects showcasing craftsmanship and detail.
 			</Typography>
 
@@ -220,7 +220,7 @@ const Portfolio = (): JSX.Element => {
 			/>
 
 			<Box
-				sx={{ width: "100%", px: { xs: 0, sm: 1 }, mt: 2 }}
+				sx={{ width: "100%", px: { xs: 0, sm: 1 }, mt: { xs: 1, sm: 2 } }}
 				onKeyDown={handleKeyDown}
 			>
 				{isLoading ? (
@@ -241,7 +241,11 @@ const Portfolio = (): JSX.Element => {
 						))}
 					</Box>
 				) : (
-					<ImageList variant="masonry" cols={isSmall ? 2 : 4} gap={24}>
+					<ImageList
+						variant="masonry"
+						cols={isSmall ? 2 : 4}
+						gap={isSmall ? 12 : 24}
+					>
 						{images.slice(startIndex, endIndex).map((src, idx) => (
 							<AnimatedImageItem
 								key={src}
