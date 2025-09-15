@@ -77,10 +77,20 @@ const Home = (): JSX.Element => {
 				/>
 			</Box>
 
-			<Grid container spacing={4} justifyContent="center">
+			<Grid container spacing={4} justifyContent="center" alignItems="stretch">
 				<Grid item xs={12} sm={6} md={4}>
-					<Card>
-						<CardContent>
+					<Card sx={{ height: "100%" }}>
+						<CardContent
+							sx={{
+								minHeight: 180,
+								height: "100%",
+								display: "flex",
+								flexDirection: "column",
+								alignItems: "center",
+								justifyContent: "center",
+								textAlign: "center",
+							}}
+						>
 							<Typography
 								variant="h5"
 								component="div"
@@ -96,8 +106,18 @@ const Home = (): JSX.Element => {
 					</Card>
 				</Grid>
 				<Grid item xs={12} sm={6} md={4}>
-					<Card>
-						<CardContent>
+					<Card sx={{ height: "100%" }}>
+						<CardContent
+							sx={{
+								minHeight: 180,
+								height: "100%",
+								display: "flex",
+								flexDirection: "column",
+								alignItems: "center",
+								justifyContent: "center",
+								textAlign: "center",
+							}}
+						>
 							<Typography
 								variant="h5"
 								component="div"
@@ -113,8 +133,18 @@ const Home = (): JSX.Element => {
 					</Card>
 				</Grid>
 				<Grid item xs={12} sm={6} md={4}>
-					<Card>
-						<CardContent>
+					<Card sx={{ height: "100%" }}>
+						<CardContent
+							sx={{
+								minHeight: 180,
+								height: "100%",
+								display: "flex",
+								flexDirection: "column",
+								alignItems: "center",
+								justifyContent: "center",
+								textAlign: "center",
+							}}
+						>
 							<Typography
 								variant="h5"
 								component="div"

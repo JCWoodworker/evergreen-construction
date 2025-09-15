@@ -12,10 +12,11 @@ const ModalButton = ({
 			variant="contained"
 			color="primary"
 			sx={{
-				marginX: { xs: 1, md: 4 },
-				marginY: { xs: 4, md: 4 },
-				padding: 2,
-				backgroundColor: "#004338",
+				mx: { xs: 1, md: 2 },
+				my: { xs: 2, md: 2 },
+				minWidth: 220,
+				height: 56,
+				px: 3,
 			}}
 			onClick={() => setModalOpen(true)}
 		>
