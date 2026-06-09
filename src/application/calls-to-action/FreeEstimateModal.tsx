@@ -25,6 +25,12 @@ function FreeEstimateModal({
 	const fieldStyle = {
 		backgroundColor: "#FFF",
 		borderRadius: "5px",
+		"& .MuiInputBase-input": {
+			color: "#000",
+		},
+		"& .MuiInputLabel-root": {
+			color: "rgba(0, 0, 0, 0.6)",
+		},
 		"& .MuiInputLabel-root.Mui-focused": {
 			padding: "2px 10px",
 			color: "rgba(0, 0, 0, 0.6)",
