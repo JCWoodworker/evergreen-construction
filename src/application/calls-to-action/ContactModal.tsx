@@ -6,8 +6,9 @@ import {
 	TextField,
 	Typography,
 } from "@mui/material"
-import { useForm, ValidationError } from "@formspree/react"
 import { Close } from "@mui/icons-material"
+import { useState } from "react"
+import { submitToFormspree } from "../../utils/submitToFormspree"
 
 function ContactModal({
 	open,
@@ -16,10 +17,24 @@ function ContactModal({
 	open: boolean
 	handleClose: () => void
 }) {
-	const [state, handleSubmit] = useForm("xwpkderv")
-	if (state.succeeded) {
-		alert("Thank you for contacting us!")
-		window.location.href = "/"
+	const [submitting, setSubmitting] = useState(false)
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+		setSubmitting(true)
+		const formData = new FormData(e.currentTarget)
+		try {
+			await submitToFormspree("xwpkderv", {
+				email: formData.get("email") as string,
+				message: formData.get("message") as string,
+			})
+			alert("Thank you for contacting us!")
+			window.location.href = "/"
+		} catch {
+			alert("Something went wrong. Please try again.")
+		} finally {
+			setSubmitting(false)
+		}
 	}
 
 	const fieldStyle = {
@@ -90,7 +105,6 @@ function ContactModal({
 						variant="outlined"
 						sx={fieldStyle}
 					/>
-					<ValidationError prefix="Email" field="email" errors={state.errors} />
 					<TextField
 						id="message"
 						label="Message"
@@ -102,14 +116,9 @@ function ContactModal({
 						variant="outlined"
 						sx={fieldStyle}
 					/>
-					<ValidationError
-						prefix="Message"
-						field="message"
-						errors={state.errors}
-					/>
 					<Button
 						type="submit"
-						disabled={state.submitting}
+						disabled={submitting}
 						variant="contained"
 						color="primary"
 						sx={{

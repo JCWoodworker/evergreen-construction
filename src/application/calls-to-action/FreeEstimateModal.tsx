@@ -6,8 +6,9 @@ import {
 	IconButton,
 	Box,
 } from "@mui/material"
-import { useForm, ValidationError } from "@formspree/react"
 import { Close } from "@mui/icons-material"
+import { useState } from "react"
+import { submitToFormspree } from "../../utils/submitToFormspree"
 
 function FreeEstimateModal({
 	open,
@@ -16,10 +17,24 @@ function FreeEstimateModal({
 	open: boolean
 	handleClose: () => void
 }) {
-	const [state, handleSubmit] = useForm("manygybq")
-	if (state.succeeded) {
-		alert("Thank you for contacting us.  We'll be in touch soon!")
-		handleClose()
+	const [submitting, setSubmitting] = useState(false)
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+		setSubmitting(true)
+		const formData = new FormData(e.currentTarget)
+		try {
+			await submitToFormspree("manygybq", {
+				email: formData.get("email") as string,
+				message: formData.get("message") as string,
+			})
+			alert("Thank you for contacting us.  We'll be in touch soon!")
+			handleClose()
+		} catch {
+			alert("Something went wrong. Please try again.")
+		} finally {
+			setSubmitting(false)
+		}
 	}
 
 	const fieldStyle = {
@@ -34,7 +49,7 @@ function FreeEstimateModal({
 		"& .MuiInputLabel-root.Mui-focused": {
 			padding: "2px 10px",
 			color: "rgba(0, 0, 0, 0.6)",
-			backgroundColor: "#FFF", 
+			backgroundColor: "#FFF",
 			borderRadius: "5px",
 			border: "2px solid #D3D3D3",
 			boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
@@ -90,7 +105,6 @@ function FreeEstimateModal({
 						variant="outlined"
 						sx={fieldStyle}
 					/>
-					<ValidationError prefix="Email" field="email" errors={state.errors} />
 					<TextField
 						id="message"
 						label="Describe your project"
@@ -102,14 +116,9 @@ function FreeEstimateModal({
 						variant="outlined"
 						sx={fieldStyle}
 					/>
-					<ValidationError
-						prefix="Message"
-						field="message"
-						errors={state.errors}
-					/>
 					<Button
 						type="submit"
-						disabled={state.submitting}
+						disabled={submitting}
 						variant="contained"
 						color="primary"
 						sx={{
